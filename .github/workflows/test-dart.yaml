@@ -10,7 +10,6 @@ on:
     paths:
       - dart/**
       - testdata/**
-      - codecov.yml
       - Makefile
       - .github/**
   pull_request:
@@ -19,7 +18,6 @@ on:
     paths:
       - dart/**
       - testdata/**
-      - codecov.yml
       - Makefile
       - .github/**
 
