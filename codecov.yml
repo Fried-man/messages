@@ -1,0 +1,2 @@
+ignore:
+  - "dart/lib/src/generated/**"
