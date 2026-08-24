@@ -84,15 +84,12 @@ jobs:
       - name: Install dependencies
         run: dart pub get --enforce-lockfile
 
-      - name: Install coverage tools
-        run: dart pub global activate coverage 1.15.1
-
       - name: Collect coverage
         run: dart test --coverage=coverage
 
       - name: Format coverage
         run: >-
-          dart pub global run coverage:format_coverage
+          dart run coverage:format_coverage
           --packages=.dart_tool/package_config.json
           --report-on=lib
           --ignore-files="lib/src/generated/**"
