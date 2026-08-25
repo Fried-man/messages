@@ -66,6 +66,8 @@ jobs:
 
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     defaults:
       run:
         working-directory: dart
@@ -102,3 +104,4 @@ jobs:
           fail_ci_if_error: true
           files: dart/coverage/lcov.info
           flags: dart
+          use_oidc: true
