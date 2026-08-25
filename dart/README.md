@@ -1,6 +1,7 @@
 # Cucumber Messages for Dart
 
 [![pub package](https://img.shields.io/pub/v/cucumber_messages.svg)](https://pub.dev/packages/cucumber_messages)
+[![Dart coverage](https://codecov.io/gh/cucumber/messages/graph/badge.svg?flag=dart)](https://app.codecov.io/gh/cucumber/messages?flags%5B0%5D=dart)
 
 [Cucumber Messages](https://github.com/cucumber/messages) is a message protocol for
 representing results and other information from Cucumber. Messages are defined by

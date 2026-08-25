@@ -10,7 +10,6 @@ on:
     paths:
       - dart/**
       - testdata/**
-      - codecov.yml
       - Makefile
       - .github/**
   pull_request:
@@ -19,7 +18,6 @@ on:
     paths:
       - dart/**
       - testdata/**
-      - codecov.yml
       - Makefile
       - .github/**
 
@@ -68,6 +66,8 @@ jobs:
 
   coverage:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     defaults:
       run:
         working-directory: dart
@@ -84,15 +84,12 @@ jobs:
       - name: Install dependencies
         run: dart pub get --enforce-lockfile
 
-      - name: Install coverage tools
-        run: dart pub global activate coverage 1.15.1
-
       - name: Collect coverage
         run: dart test --coverage=coverage
 
       - name: Format coverage
         run: >-
-          dart pub global run coverage:format_coverage
+          dart run coverage:format_coverage
           --packages=.dart_tool/package_config.json
           --report-on=lib
           --ignore-files="lib/src/generated/**"
@@ -107,3 +104,4 @@ jobs:
           fail_ci_if_error: true
           files: dart/coverage/lcov.info
           flags: dart
+          use_oidc: true
