@@ -1,0 +1,33 @@
+ignore:
+  - dart/lib/src/generated/**
+
+coverage:
+  status:
+    default_rules:
+      flag_coverage_not_uploaded_behavior: exclude
+    project:
+      default: false
+      dart:
+        flags:
+          - dart
+      python:
+        flags:
+          - python
+    patch:
+      default: false
+      dart:
+        flags:
+          - dart
+      python:
+        flags:
+          - python
+
+flags:
+  dart:
+    paths:
+      - dart/lib/**
+    carryforward: true
+  python:
+    paths:
+      - python/**
+    carryforward: true
