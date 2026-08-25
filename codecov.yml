@@ -1,0 +1,8 @@
+ignore:
+  - "dart/lib/src/generated/**"
+
+flags:
+  dart:
+    paths:
+      - "dart/lib/**"
+    carryforward: true

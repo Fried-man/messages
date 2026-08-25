@@ -10,6 +10,7 @@ on:
     paths:
       - dart/**
       - testdata/**
+      - codecov.yml
       - Makefile
       - .github/**
   pull_request:
@@ -18,6 +19,7 @@ on:
     paths:
       - dart/**
       - testdata/**
+      - codecov.yml
       - Makefile
       - .github/**
 
@@ -63,3 +65,45 @@ jobs:
 
       - name: Verify publishable package
         run: dart pub publish --dry-run
+
+  coverage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dart
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: dart-lang/setup-dart@7654d458321ee25acccccfdb86cd48bd95768ff1 # v1.8.0
+        with:
+          sdk: "3.12.0"
+
+      - name: Install dependencies
+        run: dart pub get --enforce-lockfile
+
+      - name: Install coverage tools
+        run: dart pub global activate coverage 1.15.1
+
+      - name: Collect coverage
+        run: dart test --coverage=coverage
+
+      - name: Format coverage
+        run: >-
+          dart pub global run coverage:format_coverage
+          --packages=.dart_tool/package_config.json
+          --report-on=lib
+          --ignore-files="lib/src/generated/**"
+          --in=coverage
+          --out=coverage/lcov.info
+          --lcov
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7.0.0
+        with:
+          disable_search: true
+          fail_ci_if_error: true
+          files: dart/coverage/lcov.info
+          flags: dart
